@@ -190,10 +190,15 @@ def main():
                     }
                     message = messages.get(source, "Session started")
                     
+                    # Set up environment with UTF-8 encoding for Windows
+                    env = os.environ.copy()
+                    env['PYTHONIOENCODING'] = 'utf-8'
+                    
                     subprocess.run(
                         ["uv", "run", str(tts_script), message],
                         capture_output=True,
-                        timeout=5
+                        timeout=5,
+                        env=env
                     )
             except Exception:
                 pass
