@@ -138,12 +138,17 @@ def announce_completion():
         # Get completion message (LLM-generated or fallback)
         completion_message = get_llm_completion_message()
         
+        # Set up environment with UTF-8 encoding for Windows
+        env = os.environ.copy()
+        env['PYTHONIOENCODING'] = 'utf-8'
+        
         # Call the TTS script with the completion message
         subprocess.run([
             "uv", "run", tts_script, completion_message
         ], 
         capture_output=True,  # Suppress output
-        timeout=10  # 10-second timeout
+        timeout=10,  # 10-second timeout
+        env=env
         )
         
     except (subprocess.TimeoutExpired, subprocess.SubprocessError, FileNotFoundError):

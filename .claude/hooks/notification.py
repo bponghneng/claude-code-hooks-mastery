@@ -66,12 +66,17 @@ def announce_notification():
         else:
             notification_message = "Your agent needs your input"
         
+        # Set up environment with UTF-8 encoding for Windows
+        env = os.environ.copy()
+        env['PYTHONIOENCODING'] = 'utf-8'
+        
         # Call the TTS script with the notification message
         subprocess.run([
             "uv", "run", tts_script, notification_message
         ], 
         capture_output=True,  # Suppress output
-        timeout=10  # 10-second timeout
+        timeout=10,  # 10-second timeout
+        env=env
         )
         
     except (subprocess.TimeoutExpired, subprocess.SubprocessError, FileNotFoundError):

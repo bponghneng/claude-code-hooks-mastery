@@ -2,7 +2,7 @@
 # /// script
 # requires-python = ">=3.8"
 # dependencies = [
-#     "elevenlabs",
+#     "elevenlabs==1.50.0",
 #     "python-dotenv",
 # ]
 # ///
@@ -64,7 +64,7 @@ def main():
             # Generate and play audio directly
             audio = elevenlabs.text_to_speech.convert(
                 text=text,
-                voice_id="WejK3H1m7MI9CHnIjW9K",  # Specified voice
+                voice_id="TX3LPaxmHKxFdv7VOQHJ",  # Specified voice
                 model_id="eleven_turbo_v2_5",
                 output_format="mp3_44100_128",
             )
